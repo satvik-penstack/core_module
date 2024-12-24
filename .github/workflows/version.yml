@@ -56,7 +56,9 @@ jobs:
 
     - name: Rsync versioned files to server
       run: |
-        rsync -avz --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' -e "ssh -i ~/.ssh/id_rsa" ./modules/brand/js/$BRAND_JS_NEW_NAME ./modules/brand/css/$BRAND_CSS_NEW_NAME  ubuntu@${{ secrets.REMOTE_HOST }}:/srv/modules/brand
-        rsync -avz --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' -e "ssh -i ~/.ssh/id_rsa" ./modules/distributor/js/$DIST_JS_NEW_NAME ./modules/distributor/css/$DIST_CSS_NEW_NAME  ubuntu@${{ secrets.REMOTE_HOST }}:/srv/modules/distributor
+        rsync -avz --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' -e "ssh -i ~/.ssh/id_rsa" ./modules/brand/css/$BRAND_CSS_NEW_NAME  ubuntu@${{ secrets.REMOTE_HOST }}:/srv/modules/brand/css
+        rsync -avz --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' -e "ssh -i ~/.ssh/id_rsa" ./modules/brand/js/$BRAND_JS_NEW_NAME  ubuntu@${{ secrets.REMOTE_HOST }}:/srv/modules/brand/js
+        rsync -avz --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' -e "ssh -i ~/.ssh/id_rsa" ./modules/distributor/css/$DIST_CSS_NEW_NAME  ubuntu@${{ secrets.REMOTE_HOST }}:/srv/modules/distributor/css
+        rsync -avz --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' -e "ssh -i ~/.ssh/id_rsa" ./modules/distributor/js/$DIST_JS_NEW_NAME  ubuntu@${{ secrets.REMOTE_HOST }}:/srv/modules/distributor/js
 
   
