@@ -1,0 +1,61 @@
+name: Versioned Deploy to Server
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Extract version information from commit message
+      id: commit_message
+      run: |
+        COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+        DIST_JS_VERSION=$(echo "$COMMIT_MESSAGE" | grep -oP 'dist_js:\K[0-9\.]+')
+        DIST_CSS_VERSION=$(echo "$COMMIT_MESSAGE" | grep -oP 'dist_css:\K[0-9\.]+')
+        BRAND_JS_VERSION=$(echo "$COMMIT_MESSAGE" | grep -oP 'brand_js:\K[0-9\.]+')
+        BRAND_CSS_VERSION=$(echo "$COMMIT_MESSAGE" | grep -oP 'brand_css:\K[0-9\.]+')
+
+        DIST_JS_NEW_NAME="base@${DIST_JS_VERSION}.js"
+        DIST_CSS_NEW_NAME="base@${DIST_CSS_VERSION}.css"
+        BRAND_JS_NEW_NAME="base@${BRAND_JS_VERSION}.js"
+        BRAND_CSS_NEW_NAME="base@${BRAND_CSS_VERSION}.css"
+
+        echo "DIST_JS_NEW_NAME=$DIST_JS_NEW_NAME" >> $GITHUB_ENV
+        echo "DIST_CSS_NEW_NAME=$DIST_CSS_NEW_NAME" >> $GITHUB_ENV
+        echo "BRAND_JS_NEW_NAME=$BRAND_JS_NEW_NAME" >> $GITHUB_ENV
+        echo "BRAND_CSS_NEW_NAME=$BRAND_CSS_NEW_NAME" >> $GITHUB_ENV
+
+
+    - name: Rename files based on version
+      run: |
+        mv ./modules/brand/js/base.js "./modules/brand/js/$BRAND_JS_NEW_NAME"
+        mv ./modules/brand/css/base.css "./modules/brand/css/$BRAND_CSS_NEW_NAME"
+        mv ./modules/distributor/js/base.js "./modules/distributor/js/$DIST_JS_NEW_NAME"
+        mv ./modules/distributor/css/base.css "./modules/distributor/css/$DIST_CSS_NEW_NAME"
+
+        echo "Renamed modules/brand/js/base.js to modules/brand/js/$BRAND_JS_NEW_NAME"
+        echo "Renamed modules/brand/css/base.css to modules/brand/css/$BRAND_CSS_NEW_NAME"
+        echo "Renamed modules/distributor/js/base.js to modules/distributor/js/$DIST_JS_NEW_NAME"
+        echo "Renamed modules/distributor/css/base.css to modules/distributor/css/$DIST_CSS_NEW_NAME"
+
+    - name: Rsync versioned files to server
+      run: |
+        rsync -avz --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' -e "ssh -i ~/.ssh/id_rsa" ./modules/brand/js/$BRAND_JS_NEW_NAME ./modules/brand/css/$BRAND_CSS_NEW_NAME ./modules/distributor/js/$DIST_JS_NEW_NAME ./modules/distributor/css/$DIST_CSS_NEW_NAME ubuntu@${{ secrets.REMOTE_HOST }}:/srv/modules/
+
+  

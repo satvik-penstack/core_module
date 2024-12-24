@@ -1,0 +1,271 @@
+body,html {
+    font-family: "Host Grotesk", serif !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-optical-sizing: auto;
+}
+
+:root{
+    --gray: #e9ecef;
+    --whitesmoke: #ffffff;
+    --sj-cyan:rgb(74, 165, 165);
+    --offwhite: #fafafa;
+    --curve:8px;
+    --curve-sm:4px;
+    --pd-sm: 8px;
+    --pd-xs:6px;
+    --pd-md: 16px;
+}
+p{
+    margin-bottom: 0 !important;
+}
+#sj-hover-info{
+    display: none;
+    width: 18%;
+    height: 16vh;
+    border: 1px solid #ccc;
+    border-radius: var(--curve);
+    padding: var(--pd-sm);
+    text-wrap: wrap;
+    overflow: auto;
+    position: absolute;
+    background-color: var(--offwhite);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    z-index: 1059;
+}
+#outer{
+    padding:6px;
+    zoom: 0.8;
+    width: 100%;  /* Compensates for the scaling to prevent clipping */
+    height: 100%;
+}
+#root{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 15% 85%;
+    background-color: var(--gray);
+    padding: 5px;
+    border-radius: var(--curve);
+}
+#sidebar{
+    width: 100%;
+    height: 100%;
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    padding: 8px;
+    overflow-y: auto;
+}
+#main{
+    width: 100%;
+    height: 100%;
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    background-color: var(--offwhite);
+}
+.sj-main-card{
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    background-color: white;
+    border-radius: var(--curve);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    overflow-y: auto;
+}
+#sidebar-list{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+#sidebar a {
+    text-decoration: none;
+    color: inherit;
+    appearance: none;
+    margin-bottom: 0;
+}
+.sidebar-btn{
+    display: block;
+    width: 100%;
+    font-size: medium;
+    padding: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.sidebar-options-btn{
+    width: 95%;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 6px;
+    border: 1px solid transparent;
+}
+.sidebar-options{
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: end;
+    gap: 4px;
+    transition: opacity 0.5s ease;
+}
+.sidebar-btn:hover, .sidebar-btn-active, .sidebar-options-btn:hover{
+    background-color: var(--whitesmoke);
+    border-radius: var(--curve);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border: 1px solid var(--gray);
+}
+.border-card{
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--curve);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.text-card{
+    padding: 4px;
+    width: 100%;
+    margin:0;
+    border: 1px solid #ccc;
+    border-radius: var(--curve);
+    text-align: center;
+    font-size: 15px;
+    border-right: 4px solid var(--sj-cyan);
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+}
+.right-card{
+    border-right: 3px solid var(--sj-cyan);
+}
+.bottom-card{
+   
+    border-bottom: 3px solid var(--sj-cyan);
+}
+.box{
+    margin-top: 8px;
+    padding: 8px;
+}
+.center-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#erpColumns{
+    max-height: 120px;
+    overflow-y: auto;
+    resize:none;
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(3, 1fr);
+    background-color:var(--gray);
+}
+
+#upload-err-msg{
+    display: none;
+    color: red;
+}
+select{
+    appearance: none;
+    font: inherit;
+    border: 1px solid #ccc;
+    padding: 3px;
+    width: 100%;
+    border-radius: var(--curve-sm);
+    background: url('../assets/caret-down-solid.svg') no-repeat right 2px center;
+    background-size: 14px 14px;
+    outline: none;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    &:focus{
+        outline: none;
+    }
+}
+.tab-btn-container{
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    gap:var(--pd-sm);
+    padding: var(--pd-sm);
+    border-radius: var(--curve);
+    background-color: var(--gray);
+}
+.tab-btn{
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 8px;
+    border: none;
+    border-radius: var(--curve);
+    cursor: pointer;
+}
+.tab-btn:hover ,.tab-btn-active{
+    background-color: var(--offwhite);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    transform: translateY(-1px) scale(1.03);
+    transition: all 100ms;
+}
+
+
+.search-dropdown{
+    display: none;
+    z-index: 1059;
+    position: absolute;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--gray);
+    padding: 8px;
+    border-radius: var(--curve);
+}
+.dropdown-items{
+    width: 100%;
+    text-align: start;
+    background-color: var(--gray);
+    display: block;
+    margin-bottom: 6px;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: var(--curve);
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.dropdown-items:hover, .dropdown-items-active{
+    background-color: var(--offwhite);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.dt-layout-row{
+    margin:0 !important;
+    margin-top:8px !important;
+}
+.dt-layout-start > *{
+    margin-right: 0 !important;
+}
+.dt-layout-cell{
+    justify-content: start;
+}
+th{
+    background-color: var(--gray) !important;
+    border-collapse: collapse;
+    font-size: medium;
+    border:1px solid #ccc;
+    text-align: center !important;
+    text-wrap: balance;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-transform: capitalize;
+}
+td{
+    text-align: center !important;
+    text-wrap: balance;
+    padding: 4px !important;
+}
+#column-area{
+    min-height: 80px;
+    max-height: 80px;
+    overflow-y: auto;
+    resize: none;
+}

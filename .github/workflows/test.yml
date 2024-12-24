@@ -1,8 +1,0 @@
-name: test-actions
-on: [push]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Run a one-line script
-      run: echo Hello, world!
