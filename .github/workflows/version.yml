@@ -61,4 +61,6 @@ jobs:
         rsync -avz --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' -e "ssh -i ~/.ssh/id_rsa" ./modules/distributor/css/$DIST_CSS_NEW_NAME  ubuntu@${{ secrets.REMOTE_HOST }}:/srv/modules/distributor/css
         rsync -avz --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' -e "ssh -i ~/.ssh/id_rsa" ./modules/distributor/js/$DIST_JS_NEW_NAME  ubuntu@${{ secrets.REMOTE_HOST }}:/srv/modules/distributor/js
 
-  
+    - name: Restart Caddy
+      run: |
+        ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.REMOTE_HOST }} "sudo systemctl restart caddy"
