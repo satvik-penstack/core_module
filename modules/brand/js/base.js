@@ -77,7 +77,7 @@ hoverIcons.forEach((icon) => {
 });
 
 
-function initDataTable(querySelector,buttonList=[],tableOptions={}) {
+function initDataTable(querySelector,buttonList=[],tableOptions={},gap=0) {
     $(document).ready(function() {
         $(querySelector).DataTable({
             "lengthChange": false,
@@ -95,12 +95,14 @@ function initDataTable(querySelector,buttonList=[],tableOptions={}) {
         $(`${querySelector}_wrapper .dt-search label`).hide();
         $(`${querySelector}_wrapper .dt-search input`).attr('placeholder', 'Search');
         const dtLayoutStart = document.querySelector(`${querySelector}_wrapper .dt-layout-start`);
+        dtLayoutStart.classList.add(`gap-${gap}`);
         for(let i of buttonList){
             dtLayoutStart.appendChild(i);
             if(typeof i.inserted === 'function') i.inserted();
         }
     });
 }
+
 function createTableModalTrigger(name,modalQuery,options={}){
     const btn = createButton(name,options);
     btn.setAttribute('data-bs-toggle', 'modal');
