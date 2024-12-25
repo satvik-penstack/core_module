@@ -197,6 +197,7 @@ select{
     color: inherit;
     padding: 8px;
     border: none;
+    background-color: var(--gray);
     border-radius: var(--curve);
     cursor: pointer;
 }

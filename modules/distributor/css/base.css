@@ -203,6 +203,7 @@ select{
     text-decoration: none;
     color: inherit;
     padding: 6px;
+    background-color: var(--gray);
     border: none;
     border-radius: var(--curve-sm);
     cursor: pointer;
