@@ -24,6 +24,20 @@ hoverIcons.forEach((icon) => {
     });
 });
 
+const dataBtns = document.querySelectorAll('.data-btn');
+dataBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        Array.from(btn.attributes).forEach(attr => {
+            if (attr.name.startsWith('sj-')) {
+                const name = attr.name.substring(3);
+                const input = document.querySelector(`#${name}`);
+                if(input){
+                    input.value = attr.value;
+                }
+            }
+        });
+    });
+});
 
 function initDataTable(querySelector,buttonList=[],tableOptions={},gap=0) {
     $(document).ready(function() {
@@ -50,12 +64,21 @@ function initDataTable(querySelector,buttonList=[],tableOptions={},gap=0) {
         }
     });
 }
+
+function createParagraph(text,className=''){
+    const p = document.createElement('p');
+    p.innerText = text;
+    p.className = className;
+    return p;
+}
+
 function createTableModalTrigger(name,modalQuery,options={}){
     const btn = createButton(name,options);
     btn.setAttribute('data-bs-toggle', 'modal');
     btn.setAttribute('data-bs-target', modalQuery);
     return btn;
 }
+
 function createButton(name,{className="",onClick,listeners=[]}= {}){
     const btn = document.createElement('button');
     btn.innerText = name;

@@ -103,6 +103,13 @@ function initDataTable(querySelector,buttonList=[],tableOptions={},gap=0) {
     });
 }
 
+function createParagraph(text,className=''){
+    const p = document.createElement('p');
+    p.innerText = text;
+    p.className = className;
+    return p;
+}
+
 function createTableModalTrigger(name,modalQuery,options={}){
     const btn = createButton(name,options);
     btn.setAttribute('data-bs-toggle', 'modal');
