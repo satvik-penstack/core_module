@@ -237,10 +237,6 @@ select{
     outline: none;
     box-shadow: none;
 }
-.dropdown-items:hover, .dropdown-items-active{
-    background-color: var(--offwhite);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-}
 
 .dt-layout-row{
     margin:0 !important;
@@ -279,4 +275,9 @@ td{
 }
 .table-x-overflow{
     overflow-x: auto;
+}
+
+.dropdown-items:hover, .dropdown-items-active{
+    background-color: var(--offwhite);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
