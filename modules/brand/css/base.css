@@ -37,9 +37,6 @@ p{
 }
 #outer{
     padding:6px;
-    zoom: 0.8;
-    width: 100%;  /* Compensates for the scaling to prevent clipping */
-    height: 100%;
 }
 #root{
     display: grid;
